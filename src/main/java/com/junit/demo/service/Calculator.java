@@ -9,4 +9,9 @@ public class Calculator {
         return firstNumber + secondNumber;
     }
 
+    private int subtrack(final int firstNumber, final int secondNumber) {
+        return firstNumber - secondNumber;
+    }
+
+
 }
