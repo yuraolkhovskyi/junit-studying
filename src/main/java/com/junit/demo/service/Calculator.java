@@ -18,5 +18,16 @@ public class Calculator {
         return firstNumber - secondNumber;
     }
 
+    int divide(final int firstNumber, final int secondNumber) {
+        return divide(firstNumber, secondNumber);
+    }
+
+    int multiple(final int firstNumber, final int secondNumber) {
+        return multiple(firstNumber, secondNumber);
+    }
+
+
+
+
 
 }
