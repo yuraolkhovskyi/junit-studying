@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.*;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import static java.time.Duration.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -134,4 +135,16 @@ class CalculatorTest {
         assertThat(calculator.subtrack(5, 3), is(equalTo(2)));
     }
 
+    //Run test using system property condition
+    @Test
+    @EnabledIfSystemProperty(named = "QT_ACCESSIBILITY", matches = "2")
+    void add_checkResult14() {
+        assertThat(calculator.subtrack(5, 3), is(equalTo(2)));
+    }
+
+    @Test
+    @EnabledIf("condition")
+    void onlyOnStagingServer() {
+        System.out.println("222");
+    }
 }

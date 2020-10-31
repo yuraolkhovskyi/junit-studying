@@ -1,8 +1,5 @@
 package com.junit.demo.service;
 
-import lombok.Data;
-
-@Data
 public class Person {
 
     private final String firstName;
@@ -11,5 +8,13 @@ public class Person {
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
