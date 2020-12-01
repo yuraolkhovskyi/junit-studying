@@ -1,22 +1,36 @@
 package com.junit.demo.service;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.springframework.test.context.junit.jupiter.DisabledIf;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
+
+import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 import static java.time.Duration.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
+@DisplayName(value = "Calculator test")
 class CalculatorTest {
 
+    public CalculatorTest(TestInfo testInfo) {
+        assertEquals("Calculator test", testInfo.getDisplayName());
+    }
+
     final Calculator calculator = new Calculator();
-    final Person person = new Person("Grant", null);
+    final Person person = new Person("Grant", null, LocalDate.now());
 
     //simple test
     @Test
@@ -85,21 +99,6 @@ class CalculatorTest {
         assertThat(calculator.subtrack(5, 3), is(equalTo(2)));
     }
 
-    //Assumptions
-    // TODO: 10/6/2020 where applicable ?
-    @Test
-    void add_checkResult8() {
-        final String firstName = person.getFirstName();
-
-        assumeTrue(firstName.endsWith("t"));
-        assumeFalse(firstName.endsWith("q"));
-        assumingThat(firstName.endsWith("q"),
-                () -> {
-                    assertTrue(firstName.endsWith("qq"));
-                }
-        );
-    }
-
     //Disabling tests
     @Test
     @Disabled(value = "Disabled because of testing goals")
@@ -142,9 +141,166 @@ class CalculatorTest {
         assertThat(calculator.subtrack(5, 3), is(equalTo(2)));
     }
 
+    //Assumptions
     @Test
-    @EnabledIf("condition")
-    void onlyOnStagingServer() {
-        System.out.println("222");
+    void add_checkResult8() {
+        final String firstName = person.getFirstName();
+
+        assumeTrue("tesst".endsWith("t"));
+        assumingThat("MIqq".endsWith("q"),
+                () -> {
+                    assertTrue("qqqq".endsWith("qq"));
+                }
+        );
     }
+
+    @Test
+    void testOnDev() {
+        System.setProperty("ENV", "DEV");
+        Assumptions.assumeTrue("DEV".equals(System.getProperty("ENV")));
+        //remainder of test will proceed
+    }
+
+    @Test
+    void testOnProd() {
+        System.setProperty("ENV", "PROD");
+        Assumptions.assumeTrue("DEV".equals(System.getProperty("ENV")), "Failed because of assumption");
+        //remainder of test will be aborted
+    }
+
+
+    //Custom conditions
+    @EnabledIf(expression = "#{systemProperties['java.version'].startsWith('11')}")
+    @Test
+    void givenEnabledIfLiteral_WhenTrue_ThenTestExecuted() {
+        assertTrue(true);
+    }
+
+    //Custom conditions
+    @Test
+    @DisabledIf("#{systemProperties['java.version'].startsWith('11')}")
+    void givenDisabledIf_WhenTrue_ThenTestNotExecuted() {
+        assertTrue(true);
+    }
+
+
+    @RepeatedTest(value = 10, name = "{displayName} -- Repetition - {currentRepetition} out of {totalRepetitions}")
+    void repeatedTestExample() {
+        assertTrue(true);
+    }
+
+    //constructors in junit5 tests TestInfo
+    @Test
+    void testInfoTestExample(final TestInfo testInfo) {
+        final String displayName = testInfo.getDisplayName(); //if no @DisplayName specified then test method name + params
+        final Set<String> tags = testInfo.getTags();
+        final Optional<Class<?>> testClass = testInfo.getTestClass();
+        final Optional<Method> testMethod = testInfo.getTestMethod();
+
+        System.out.println(displayName+ "\n" + tags +"\n" + testClass +"\n" + testMethod);
+
+        assertTrue(true);
+    }
+
+    //constructors in junit5 tests RepetitionInfo
+    @RepeatedTest(5)
+    void repetitionInfoExample(final RepetitionInfo repetitionInfo) {
+        final int currentRepetition = repetitionInfo.getCurrentRepetition();
+        final int totalRepetitions = repetitionInfo.getTotalRepetitions();
+
+        System.out.println("Current repetition: " + currentRepetition + "\n" + "Number of reps:" +  +  totalRepetitions);
+
+        assertTrue(true);
+    }
+
+    //constructors in junit5 tests Test Reporter
+    @RepeatedTest(5)
+    void repetitionInfoExample(final TestReporter testReporter) {
+        //used just for additional info
+        testReporter.publishEntry("a status message");
+        testReporter.publishEntry(new HashMap<>(Map.of("1", "a")));
+        testReporter.publishEntry("first param", "second param");
+
+        System.out.println();
+
+        assertTrue(true);
+    }
+    //Other parameter resolvers must be explicitly enabled by registering appropriate extensions via @ExtendWith.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //testing static methods in junit 5
+    @Test
+    @DisplayName("Should throw an exception upon failing to uncover mind-boggling mysteries")
+    void testUncoverMysteries() {
+        // Instantiate a MockedStatic in a try-with-resources block
+        try (MockedStatic<MysteryBox> mb = Mockito.mockStatic(MysteryBox.class)) {
+            // stub the static method that is called by the class under test
+            MysteryBox.amaze("test");
+            // the subject under test uses MysteryBox internally, to uncover an amazing secret
+            // we make sure it throws an exception when the box fails to deliver
+            assertEquals("1", "1");
+
+
+            mb.verify(()-> MysteryBox.amaze("test"));
+
+        }
+        // the mock is not visible outside the block above
+    }
+
+
+
+
 }
