@@ -2,11 +2,32 @@ package com.junit.demo.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class Calculator {
 
-    private int add(final int firstNumber, final int secondNumber) {
+    int add(final Integer firstNumber, final Integer secondNumber) {
+        if (Objects.isNull(firstNumber) || Objects.isNull(secondNumber)){
+            throw new RuntimeException("invalid first or second number");
+        }
         return firstNumber + secondNumber;
     }
+
+    int subtrack(final int firstNumber, final int secondNumber) {
+        return firstNumber - secondNumber;
+    }
+
+    int divide(final int firstNumber, final int secondNumber) {
+        return divide(firstNumber, secondNumber);
+    }
+
+    int multiple(final int firstNumber, final int secondNumber) {
+        return multiple(firstNumber, secondNumber);
+    }
+
+
+
+
 
 }
