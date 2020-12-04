@@ -28,6 +28,8 @@ public class Calculator {
 
 
 
-
+    public void testingCherryPick2() {
+        System.out.println("study cherry-pick --- phase B - do want in  develop");
+    }
 
 }
