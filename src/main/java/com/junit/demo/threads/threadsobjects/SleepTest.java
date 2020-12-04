@@ -1,4 +1,4 @@
-package com.junit.demo.threads.basics;
+package com.junit.demo.threads.threadsobjects;
 
 public class SleepTest {
 

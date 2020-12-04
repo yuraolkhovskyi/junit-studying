@@ -1,4 +1,4 @@
-package com.threads.threadsobjects;
+package com.junit.demo.threads.threadsobjects;
 
 import lombok.SneakyThrows;
 

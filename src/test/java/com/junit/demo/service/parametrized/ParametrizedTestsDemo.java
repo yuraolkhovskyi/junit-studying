@@ -95,43 +95,41 @@ public class ParametrizedTestsDemo {
 
     @ParameterizedTest
     @CsvFileSource(resources = "src/test/resources/two-column.csv", numLinesToSkip = 1)
-    void testWithCsvFileSourceFromFile(String country, int reference) {
+    void testWithCsvFileSourceFromFile(final String country, final int reference) {
         assertNotNull(country);
         assertNotEquals(0, reference);
     }
 
     @ParameterizedTest
     @ArgumentsSource(MyArgumentsProvider.class)
-    void testWithArgumentsSource(String argument) {
+    void testWithArgumentsSource(final String argument) {
         assertNotNull(argument);
     }
 
 
     @ParameterizedTest
     @ValueSource(strings = "How to achieve")
-    void testWithImplicitFallbackArgumentConversion(Book book) {
+    void testWithImplicitFallbackArgumentConversion(final Book book) {
         assertEquals("How to achieve", book.getTitle());
     }
 
     @ParameterizedTest
     @CsvSource({
-            "Jane, Doe, F, 1990-05-20",
-            "John, Doe, M, 1990-10-22"
+             "Jane, Doe, F, 1990-05-20",
+             "John, Doe, M, 1990-10-22"
     })
-    void testWithArgumentsAccessor(ArgumentsAccessor arguments) {
-        Person person = new Person(arguments.getString(0),
+    void testWithArgumentsAccessor(final ArgumentsAccessor arguments) {
+        final var person = new Person(arguments.getString(0),
                 arguments.getString(1),
                 arguments.get(3, LocalDate.class));
 
         assertEquals("Doe", person.getLastName());
         assertEquals(1990, person.getBirthday().getYear());
     }
-
 }
 
 class StringsProviders {
-
-    static Stream<String> tinyStrings() {
+    protected static Stream<String> tinyStrings() {
         return Stream.of(".", "oo", "OOO");
     }
 }
@@ -140,7 +138,7 @@ class MyArgumentsProvider implements ArgumentsProvider {
 
     @Override
     public Stream<? extends Arguments> provideArguments(final ExtensionContext context) {
-        return Stream.of("apple", "banana").map(Arguments::of);
+        return Stream.of("stringA", "stringB").map(Arguments::of);
     }
 }
 
@@ -150,6 +148,7 @@ class Book {
     private final String title;
 
     private Book(String title) {
+        new StringsProviders();
         this.title = title;
     }
 

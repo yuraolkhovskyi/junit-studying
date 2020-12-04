@@ -1,4 +1,4 @@
-package com.threads.synchronization;
+package com.junit.demo.threads.synchronization;
 
 public class SynchronizedTest implements Runnable{
 
