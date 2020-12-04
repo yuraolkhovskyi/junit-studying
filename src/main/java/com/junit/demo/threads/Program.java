@@ -1,4 +1,4 @@
-package com;
+package com.junit.demo.threads;
 
 import java.util.Collection;
 import java.util.List;

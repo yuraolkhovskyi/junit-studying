@@ -1,4 +1,4 @@
-package com.threads.pools;
+package com.junit.demo.threads.pools;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
