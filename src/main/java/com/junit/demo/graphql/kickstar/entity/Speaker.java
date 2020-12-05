@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Speaker {
+public class Speaker implements Human {
 
     private Long id;
     private String name;

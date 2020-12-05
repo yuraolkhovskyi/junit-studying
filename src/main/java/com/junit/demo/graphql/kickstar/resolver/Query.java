@@ -2,6 +2,7 @@ package com.junit.demo.graphql.kickstar.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.junit.demo.graphql.kickstar.entity.Attendee;
+import com.junit.demo.graphql.kickstar.entity.Human;
 import com.junit.demo.graphql.kickstar.entity.Speaker;
 import com.junit.demo.graphql.kickstar.entity.Talk;
 import com.junit.demo.graphql.kickstar.service.AttendeeService;
@@ -41,6 +42,17 @@ public class Query implements GraphQLQueryResolver {
         union.addAll(list2);
 
         return union;
+    }
+
+    public List<Human> allHumans() {
+        List<Attendee> all = attendeeService.findAll();
+        List<Speaker> all1 = speakerService.findAll();
+
+        List list = new ArrayList();
+        list.addAll(all);
+        list.addAll(all1);
+
+        return list;
     }
 
 }

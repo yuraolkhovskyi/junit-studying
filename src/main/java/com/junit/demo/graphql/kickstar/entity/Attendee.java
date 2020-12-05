@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Attendee {
+public class Attendee implements Human {
 
     private Long id;
     private String name;
