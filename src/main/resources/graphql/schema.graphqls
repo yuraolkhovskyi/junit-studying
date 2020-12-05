@@ -24,6 +24,16 @@
 
      union All = Speaker | Talk
 
+    input SpeakerInput {
+        name: String
+        twitter: String
+    }
+
+
+     type Mutation {
+        addSpeaker(speaker: SpeakerInput) : Speaker
+     }
+
      type Query {
              allTalks: [Talk]
              allAttendees: [Attendee]
@@ -34,4 +44,5 @@
 
      schema {
        query: Query
+       mutation: Mutation
      }

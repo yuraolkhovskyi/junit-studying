@@ -6,6 +6,7 @@ import com.junit.demo.graphql.kickstar.entity.Talk;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,21 +16,26 @@ public class SpeakerService {
 
     private final TalkService talkService;
 
-    private static final List<Speaker> speakers;
-    private static final List<SpeakerTalk> talksBySpeaker;
+    public static final List<Speaker> speakers;
+    public static final List<SpeakerTalk> talksBySpeaker;
 
     static {
-        speakers = List.of(
-                new Speaker(1L, "Jack Ma", "Java 15 best coder"),
-                new Speaker(2L, "David Q", "GraphQL best coder"),
-                new Speaker(3L, "Andrey J", "Junit 5 best coder")
-        );
+        speakers = new ArrayList<>() {
+            {
+                add(new Speaker(1L, "Jack Ma", "Java 15 best coder"));
+                add(new Speaker(2L, "David Q", "GraphQL best coder"));
+                add(new Speaker(3L, "Andrey J", "Junit 5 best coder"));
+            }
+        };
 
-        talksBySpeaker = List.of(
-                new SpeakerTalk(1L, 1L, 1L),
-                new SpeakerTalk(2L, 2L, 2L),
-                new SpeakerTalk(3L, 3L, 3L)
-        );
+        talksBySpeaker = new ArrayList<>() {
+            {
+                add(new SpeakerTalk(1L, 1L, 1L));
+                add(new SpeakerTalk(2L, 2L, 2L));
+                add(new SpeakerTalk(3L, 3L, 3L));
+            }
+        };
+
     }
 
     public List<Speaker> findAll() {

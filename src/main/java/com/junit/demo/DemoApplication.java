@@ -1,6 +1,7 @@
 package com.junit.demo;
 
 import com.coxautodev.graphql.tools.SchemaParser;
+import com.junit.demo.graphql.kickstar.resolver.Mutation;
 import com.junit.demo.graphql.kickstar.resolver.Query;
 import com.junit.demo.graphql.kickstar.resolver.TalkResolver;
 import com.junit.demo.graphql.kickstar.service.AttendeeService;
@@ -54,7 +55,8 @@ public class DemoApplication {
 //                .dictionary()
                 .resolvers(
                         new Query(talkService, attendeeService, speakerService),
-                        new TalkResolver(speakerService))
+                        new TalkResolver(speakerService),
+                        new Mutation(speakerService))
                 .build()
                 .makeExecutableSchema();
     }
