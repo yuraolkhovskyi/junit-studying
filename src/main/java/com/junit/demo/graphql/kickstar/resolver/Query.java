@@ -9,6 +9,7 @@ import com.junit.demo.graphql.kickstar.service.SpeakerService;
 import com.junit.demo.graphql.kickstar.service.TalkService;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,4 +30,17 @@ public class Query implements GraphQLQueryResolver {
     public List<Speaker> allSpeakers() {
         return speakerService.findAll();
     }
+
+    public List<Object> allAll() {
+        List list1 = talkService.findAll();
+        List list2 = speakerService.findAll();
+
+        List union = new ArrayList();
+
+        union.addAll(list1);
+        union.addAll(list2);
+
+        return union;
+    }
+
 }

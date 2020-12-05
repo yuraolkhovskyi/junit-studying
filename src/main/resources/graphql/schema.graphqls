@@ -17,10 +17,13 @@
           speakers: [Speaker]
      }
 
+     union All = Speaker | Talk
+
      type Query {
              allTalks: [Talk]
              allAttendees: [Attendee]
              allSpeakers: [Speaker]
+             allAll: [All]
      }
 
      schema {
