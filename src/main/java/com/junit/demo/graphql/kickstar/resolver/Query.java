@@ -9,16 +9,21 @@ import com.junit.demo.graphql.kickstar.service.AttendeeService;
 import com.junit.demo.graphql.kickstar.service.SpeakerService;
 import com.junit.demo.graphql.kickstar.service.TalkService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+@Component
 public class Query implements GraphQLQueryResolver {
 
-    private final TalkService talkService;
-    private final AttendeeService attendeeService;
-    private final SpeakerService speakerService;
+    @Resource
+    private TalkService talkService;
+    @Resource
+    private AttendeeService attendeeService;
+    @Resource
+    private SpeakerService speakerService;
 
     public List<Talk> allTalks() {
         return talkService.findAll();

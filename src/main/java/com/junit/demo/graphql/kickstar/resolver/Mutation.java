@@ -5,13 +5,16 @@ import com.junit.demo.graphql.kickstar.entity.Speaker;
 import com.junit.demo.graphql.kickstar.entity.SpeakerInput;
 import com.junit.demo.graphql.kickstar.service.SpeakerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Random;
 
-@RequiredArgsConstructor
+@Component
 public class Mutation implements GraphQLMutationResolver {
 
-    private final SpeakerService speakerService;
+    @Resource
+    private SpeakerService speakerService;
 
 
     public Speaker addSpeaker(SpeakerInput speakerInput) {

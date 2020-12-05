@@ -17,49 +17,44 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DemoApplication {
 
-//	public static void main(String[] args) {
-//		SpringApplication.run(DemoApplication.class, args);
-//	}
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
 
 
     //GraphQl
-    private final SpeakerService speakerService;
-    private final AttendeeService attendeeService;
-    private final TalkService talkService;
+//    private final SpeakerService speakerService;
+//    private final AttendeeService attendeeService;
+//    private final TalkService talkService;
+//
+//    public DemoApplication(final SpeakerService speakerService,
+//                           final AttendeeService attendeeService,
+//                           final TalkService talkService) {
+//        this.speakerService = speakerService;
+//        this.attendeeService = attendeeService;
+//        this.talkService = talkService;
+//    }
 
-    public DemoApplication(final SpeakerService speakerService,
-                           final AttendeeService attendeeService,
-                           final TalkService talkService) {
-        this.speakerService = speakerService;
-        this.attendeeService = attendeeService;
-        this.talkService = talkService;
-    }
-
-
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
-
-    @Bean
-    public ServletRegistrationBean graphQLServlet() {
-        return new ServletRegistrationBean(SimpleGraphQLHttpServlet.newBuilder(buildSchema(speakerService, attendeeService, talkService))
-                .build(), "/graphql");
-    }
-
-    private static GraphQLSchema buildSchema(SpeakerService speakerService,
-                                             AttendeeService attendeeService,
-                                             TalkService talkService) {
-        return SchemaParser
-                .newParser()
-                .file("graphql/schema.graphqls")
-//                .dictionary()
-                .resolvers(
-                        new Query(talkService, attendeeService, speakerService),
-                        new TalkResolver(speakerService),
-                        new Mutation(speakerService))
-                .build()
-                .makeExecutableSchema();
-    }
+//    @Bean
+//    public ServletRegistrationBean graphQLServlet() {
+//        return new ServletRegistrationBean(SimpleGraphQLHttpServlet.newBuilder(buildSchema(speakerService, attendeeService, talkService))
+//                .build(), "/graphql");
+//    }
+//
+//    private static GraphQLSchema buildSchema(SpeakerService speakerService,
+//                                             AttendeeService attendeeService,
+//                                             TalkService talkService) {
+//        return SchemaParser
+//                .newParser()
+//                .file("graphql/schema.graphqls")
+////                .dictionary()
+//                .resolvers(
+//                        new Query(talkService, attendeeService, speakerService),
+//                        new TalkResolver(speakerService),
+//                        new Mutation(speakerService))
+//                .build()
+//                .makeExecutableSchema();
+//    }
 
 
 }
