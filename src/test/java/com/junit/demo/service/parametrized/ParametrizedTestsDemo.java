@@ -3,6 +3,8 @@ package com.junit.demo.service.parametrized;
 import com.junit.demo.service.Person;
 import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
@@ -13,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static java.math.BigDecimal.ZERO;
@@ -37,8 +40,8 @@ public class ParametrizedTestsDemo {
     }
 
     @ParameterizedTest
-    @EnumSource(mode = EnumSource.Mode.EXCLUDE,names = {"MINUTES", "SECONDS"})
-    //modes: INCLUDE EXCLUDE MATCH_ALL MATCH_ANY
+    @EnumSource(mode = EnumSource.Mode.EXCLUDE, names = {"MINUTES", "SECONDS"})
+        //modes: INCLUDE EXCLUDE MATCH_ALL MATCH_ANY
     void enumSourceTest(final ChronoUnit unit) {
         assertFalse(EnumSet.of(ChronoUnit.MINUTES, ChronoUnit.SECONDS).contains(unit));
     }
@@ -55,12 +58,11 @@ public class ParametrizedTestsDemo {
     }
 
 
-
     @ParameterizedTest
     @MethodSource("stringIntAndListProvider")
     void testWithMultiArgMethodSource(String str, int num, List<String> list) {
         assertEquals(5, str.length());
-        assertTrue(num >=1 && num <=2);
+        assertTrue(num >= 1 && num <= 2);
         assertEquals(2, list.size());
     }
 
@@ -70,9 +72,6 @@ public class ParametrizedTestsDemo {
                 arguments("lemon", 2, Arrays.asList("x", "y"))
         );
     }
-
-
-
 
 
     @ParameterizedTest
@@ -115,8 +114,8 @@ public class ParametrizedTestsDemo {
 
     @ParameterizedTest
     @CsvSource({
-             "Jane, Doe, F, 1990-05-20",
-             "John, Doe, M, 1990-10-22"
+            "Jane, Doe, F, 1990-05-20",
+            "John, Doe, M, 1990-10-22"
     })
     void testWithArgumentsAccessor(final ArgumentsAccessor arguments) {
         final var person = new Person(arguments.getString(0),
@@ -126,6 +125,16 @@ public class ParametrizedTestsDemo {
         assertEquals("Doe", person.getLastName());
         assertEquals(1990, person.getBirthday().getYear());
     }
+
+
+    // fails if execution time exceeds 1 millisecond
+    @Test
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+    void failsIfExecutionTimeExceeds100Milliseconds() throws InterruptedException {
+        Thread.sleep(101);
+    }
+
+
 }
 
 class StringsProviders {
@@ -148,7 +157,6 @@ class Book {
     private final String title;
 
     private Book(String title) {
-        new StringsProviders();
         this.title = title;
     }
 
