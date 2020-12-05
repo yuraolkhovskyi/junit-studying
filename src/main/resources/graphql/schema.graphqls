@@ -12,11 +12,15 @@
      type Talk {
           id: ID!
           title: String
+    #Here is the docs for Talk. You can read about the Talk and its details.
           description: String
+          speakers: [Speaker]
      }
 
      type Query {
-           allTalks: [Talk]
+             allTalks: [Talk]
+             allAttendees: [Attendee]
+             allSpeakers: [Speaker]
      }
 
      schema {

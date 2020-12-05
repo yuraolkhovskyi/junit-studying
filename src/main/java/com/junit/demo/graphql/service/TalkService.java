@@ -4,6 +4,7 @@ import com.junit.demo.graphql.entity.Talk;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TalkService {
@@ -20,6 +21,10 @@ public class TalkService {
 
     public List<Talk> findAll() {
         return talks;
+    }
+
+    public Optional<Talk> findById(final Long talkId) {
+        return talks.stream().filter(e -> e.getId().equals(talkId)).findFirst();
     }
 
 //    public List<Talk> findAllTalksBySpeaker(Speaker speaker) {
