@@ -1,11 +1,11 @@
 package com.junit.demo;
 
 import com.coxautodev.graphql.tools.SchemaParser;
-import com.junit.demo.graphql.resolver.Query;
-import com.junit.demo.graphql.resolver.TalkResolver;
-import com.junit.demo.graphql.service.AttendeeService;
-import com.junit.demo.graphql.service.SpeakerService;
-import com.junit.demo.graphql.service.TalkService;
+import com.junit.demo.graphql.kickstar.resolver.Query;
+import com.junit.demo.graphql.kickstar.resolver.TalkResolver;
+import com.junit.demo.graphql.kickstar.service.AttendeeService;
+import com.junit.demo.graphql.kickstar.service.SpeakerService;
+import com.junit.demo.graphql.kickstar.service.TalkService;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLHttpServlet;
 import org.springframework.boot.SpringApplication;

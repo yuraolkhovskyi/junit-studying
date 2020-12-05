@@ -1,8 +1,8 @@
-package com.junit.demo.graphql.service;
+package com.junit.demo.graphql.kickstar.service;
 
-import com.junit.demo.graphql.entity.Speaker;
-import com.junit.demo.graphql.entity.SpeakerTalk;
-import com.junit.demo.graphql.entity.Talk;
+import com.junit.demo.graphql.kickstar.entity.Speaker;
+import com.junit.demo.graphql.kickstar.entity.SpeakerTalk;
+import com.junit.demo.graphql.kickstar.entity.Talk;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

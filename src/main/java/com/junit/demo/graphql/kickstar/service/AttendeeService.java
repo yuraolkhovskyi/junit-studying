@@ -1,6 +1,6 @@
-package com.junit.demo.graphql.service;
+package com.junit.demo.graphql.kickstar.service;
 
-import com.junit.demo.graphql.entity.Attendee;
+import com.junit.demo.graphql.kickstar.entity.Attendee;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

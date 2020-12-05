@@ -1,4 +1,4 @@
-package com.junit.demo.graphql.entity;
+package com.junit.demo.graphql.kickstar.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

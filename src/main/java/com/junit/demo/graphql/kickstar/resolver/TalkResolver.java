@@ -1,9 +1,9 @@
-package com.junit.demo.graphql.resolver;
+package com.junit.demo.graphql.kickstar.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.junit.demo.graphql.entity.Speaker;
-import com.junit.demo.graphql.entity.Talk;
-import com.junit.demo.graphql.service.SpeakerService;
+import com.junit.demo.graphql.kickstar.entity.Speaker;
+import com.junit.demo.graphql.kickstar.entity.Talk;
+import com.junit.demo.graphql.kickstar.service.SpeakerService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
