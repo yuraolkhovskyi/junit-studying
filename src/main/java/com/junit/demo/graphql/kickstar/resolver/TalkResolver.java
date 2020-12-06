@@ -4,7 +4,6 @@ import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.junit.demo.graphql.kickstar.entity.Speaker;
 import com.junit.demo.graphql.kickstar.entity.Talk;
 import com.junit.demo.graphql.kickstar.service.SpeakerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

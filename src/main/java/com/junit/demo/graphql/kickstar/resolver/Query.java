@@ -8,7 +8,7 @@ import com.junit.demo.graphql.kickstar.entity.Talk;
 import com.junit.demo.graphql.kickstar.service.AttendeeService;
 import com.junit.demo.graphql.kickstar.service.SpeakerService;
 import com.junit.demo.graphql.kickstar.service.TalkService;
-import lombok.RequiredArgsConstructor;
+import graphql.schema.DataFetchingEnvironment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -37,7 +37,10 @@ public class Query implements GraphQLQueryResolver {
         return speakerService.findAll();
     }
 
-    public List<Object> allAll() {
+    public List<Object> allAll(DataFetchingEnvironment dataFetchingEnvironment) {
+
+        dataFetchingEnvironment.getSelectionSet().getField(""); // if you have already argument then put it in the end of parameters
+
         List list1 = talkService.findAll();
         List list2 = speakerService.findAll();
 

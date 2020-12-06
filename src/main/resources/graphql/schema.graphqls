@@ -29,6 +29,14 @@
         twitter: String
     }
 
+    type Score {
+        title: String
+        score: Int
+    }
+
+     type Subscription {
+        scores(title: String) : Score
+     }
 
      type Mutation {
         addSpeaker(speaker: SpeakerInput) : Speaker
@@ -45,4 +53,5 @@
      schema {
        query: Query
        mutation: Mutation
+       subscription: Subscription
      }

@@ -17,7 +17,7 @@ public class SpeakerService {
     private final TalkService talkService;
 
     public static final List<Speaker> speakers;
-    public static final List<SpeakerTalk> talksBySpeaker;
+    public static final List<SpeakerTalk> speakersForTalk;
 
     static {
         speakers = new ArrayList<>() {
@@ -28,7 +28,7 @@ public class SpeakerService {
             }
         };
 
-        talksBySpeaker = new ArrayList<>() {
+        speakersForTalk = new ArrayList<>() {
             {
                 add(new SpeakerTalk(1L, 1L, 1L));
                 add(new SpeakerTalk(2L, 2L, 2L));
@@ -55,7 +55,7 @@ public class SpeakerService {
     }
 
     public Optional<SpeakerTalk> findById(final Long talkId) {
-        return talksBySpeaker.stream().filter(e -> e.getId().equals(talkId)).findFirst();
+        return speakersForTalk.stream().filter(e -> e.getId().equals(talkId)).findFirst();
     }
 
 //    public List<Talk> findAllTAlksByAttendee(Attendee attendee) {
