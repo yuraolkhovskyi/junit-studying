@@ -46,13 +46,12 @@ public class DemoApplication {
                 .build(), "/graphql");
     }
 
-    private static GraphQLSchema buildSchema(SpeakerService speakerService,
-                                             AttendeeService attendeeService,
-                                             TalkService talkService) {
+    private static GraphQLSchema buildSchema(final SpeakerService speakerService,
+                                             final AttendeeService attendeeService,
+                                             final TalkService talkService) {
         return SchemaParser
                 .newParser()
                 .file("graphql/schema.graphqls")
-//                .dictionary()
                 .resolvers(
                         new Query(talkService, attendeeService, speakerService),
                         new TalkResolver(speakerService),
