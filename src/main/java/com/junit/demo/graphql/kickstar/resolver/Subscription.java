@@ -15,13 +15,13 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class Subscription implements GraphQLSubscriptionResolver {
 
-    public Publisher<Score> scores(String title) {
+    public Publisher<Score> scores(String title, Boolean isNice) {
 
         Observable<Score> observable = Observable.create(e -> {
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
 
             scheduledExecutorService.scheduleAtFixedRate(() -> {
-                final Score score = Score.builder().title(title).score((int) Math.floor(Math.random() * 5)).build();
+                final Score score = Score.builder().title(title).isNice(isNice).score((int) Math.floor(Math.random() * 5)).build();
                 e.onNext(score);
             }, 0, 2, TimeUnit.SECONDS);
 

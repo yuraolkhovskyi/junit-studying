@@ -9,5 +9,6 @@ public class Score {
 
     private String title;
     private int score;
+    private boolean isNice;
 
 }

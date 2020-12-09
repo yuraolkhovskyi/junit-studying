@@ -32,10 +32,11 @@
     type Score {
         title: String
         score: Int
+        isNice: Boolean
     }
 
      type Subscription {
-        scores(title: String) : Score
+        scores(title: String, nice: Boolean) : Score
      }
 
      type Mutation {
