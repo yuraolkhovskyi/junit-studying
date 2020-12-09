@@ -42,8 +42,8 @@ public class DemoApplication {
 
     @Bean
     public ServletRegistrationBean graphQLServlet() {
-        return new ServletRegistrationBean(SimpleGraphQLHttpServlet.newBuilder(buildSchema(speakerService, attendeeService, talkService))
-                .build(), "/graphql");
+        return new ServletRegistrationBean(
+                SimpleGraphQLHttpServlet.newBuilder(buildSchema(speakerService, attendeeService, talkService)).build(), "/graphql");
     }
 
     private static GraphQLSchema buildSchema(final SpeakerService speakerService,

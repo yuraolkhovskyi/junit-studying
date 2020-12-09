@@ -27,6 +27,18 @@ public class TalkService {
         return talks.stream().filter(e -> e.getId().equals(talkId)).findFirst();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
 //    public List<Talk> findAllTalksBySpeaker(Speaker speaker) {
 //        List<SpeakerTalk> st = speakerTalkRepository.findAllBySpeakerId(speaker.getId());
 //
