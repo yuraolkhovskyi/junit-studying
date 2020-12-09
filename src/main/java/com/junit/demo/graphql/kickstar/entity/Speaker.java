@@ -10,5 +10,6 @@ public class Speaker implements Human {
     private Long id;
     private String name;
     private String twitter;
+    private Rate rate;
 
 }

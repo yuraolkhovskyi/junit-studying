@@ -1,5 +1,6 @@
 package com.junit.demo.graphql.kickstar.service;
 
+import com.junit.demo.graphql.kickstar.entity.Rate;
 import com.junit.demo.graphql.kickstar.entity.Speaker;
 import com.junit.demo.graphql.kickstar.entity.SpeakerTalk;
 import com.junit.demo.graphql.kickstar.entity.Talk;
@@ -22,9 +23,9 @@ public class SpeakerService {
     static {
         speakers = new ArrayList<>() {
             {
-                add(new Speaker(1L, "Jack Ma", "Java 15 best coder"));
-                add(new Speaker(2L, "David Q", "GraphQL best coder"));
-                add(new Speaker(3L, "Andrey J", "Junit 5 best coder"));
+                add(new Speaker(1L, "Jack Ma", "Java 15 best coder", Rate.GOOD));
+                add(new Speaker(2L, "David Q", "GraphQL best coder", Rate.GOOD));
+                add(new Speaker(3L, "Andrey J", "Junit 5 best coder", Rate.GOOD));
             }
         };
 

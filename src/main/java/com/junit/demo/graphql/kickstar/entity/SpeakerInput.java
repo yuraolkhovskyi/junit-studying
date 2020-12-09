@@ -11,5 +11,6 @@ public class SpeakerInput {
 
     private String name;
     private String twitter;
+    private Rate rate;
 
 }

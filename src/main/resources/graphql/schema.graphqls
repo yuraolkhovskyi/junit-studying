@@ -12,6 +12,7 @@
         id: ID!
         name: String
         twitter: String
+        rate: Rate
      }
 
      type Talk {
@@ -27,6 +28,7 @@
     input SpeakerInput {
         name: String
         twitter: String
+        rate: Rate
     }
 
     type Score {
@@ -41,6 +43,12 @@
 
      type Mutation {
         addSpeaker(speaker: SpeakerInput) : Speaker
+     }
+
+     enum Rate{
+        NORMAL
+        GOOD
+        FINE
      }
 
      type Query {

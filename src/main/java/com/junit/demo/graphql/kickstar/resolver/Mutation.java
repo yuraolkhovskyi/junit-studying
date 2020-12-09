@@ -17,7 +17,11 @@ public class Mutation implements GraphQLMutationResolver {
 
 
     public Speaker addSpeaker(SpeakerInput speakerInput) {
-        Speaker speaker = new Speaker(new Random().nextLong(), speakerInput.getName(), speakerInput.getTwitter());
+        final var speaker = new Speaker(new Random().nextLong(),
+                speakerInput.getName(),
+                speakerInput.getTwitter(),
+                speakerInput.getRate()
+        );
         SpeakerService.speakers.add(speaker);
         return speaker;
     }
